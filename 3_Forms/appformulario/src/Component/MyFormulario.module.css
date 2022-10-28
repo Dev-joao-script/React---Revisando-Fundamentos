@@ -1,0 +1,12 @@
+.MyStye{
+    padding: 5px;
+    margin: 2px;
+    background-color: lightblue;
+    width: 500px;
+    text-align: left;
+}
+
+input, select, textarea{
+    display: block;
+    margin: 5px;
+}
