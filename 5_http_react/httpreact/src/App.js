@@ -1,7 +1,7 @@
 import './App.css';
-  import { useState } from 'react';
-  import {useFetch} from './hook/useFetch';
-
+import { useState } from 'react';
+import { useFetch } from './hook/useFetch';
+import loading from './assets/load.gif'
 function App() {
 
   const url = "  http://localhost:3000/products"
@@ -9,8 +9,7 @@ function App() {
   const [products] = useState([]);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
-
-  const { data: produtos, httpConfig } = useFetch(url);
+  const { data: produtos, httpConfig, load, error } = useFetch(url);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,46 +18,50 @@ function App() {
       price
     }
 
-      /*
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(product),
-    });
+    /*
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(product),
+  });
 
-    //conveter o objeto json em string
-    const addedProduct = await response.json();
+  //conveter o objeto json em string
+  const addedProduct = await response.json();
 
-    setProducts((prevProducts) => [...prevProducts, addedProduct])
- */
-  httpConfig(product, "POST")
-  setName("");
-  setPrice("");
-  
+  setProducts((prevProducts) => [...prevProducts, addedProduct])
+*/
+    httpConfig(product, "POST", load)
+    setName("");
+    setPrice("");
+
   }
 
-/*
-  useEffect( () => {
-   async function fetchData(){
-   const res = await fetch(url)
-   const data = await res.json()
-   setProducts(data)
- }
- fetchData();
-  },[])
-*/
+  /*
+    useEffect( () => {
+     async function fetchData(){
+     const res = await fetch(url)
+     const data = await res.json()
+     setProducts(data)
+   }
+   fetchData();
+    },[])
+  */
 
   return (
     <div className="App">
       <h1>Lista de Produtos</h1>
       <br />
-      <ul>
-        {produtos && produtos.map((produto) => (
-          <li key={produto.id}>{produto.name} - R$: {produto.price}</li>
-        ))}
-      </ul>
+      {error && <p>{error}</p>}
+      {load && <img src={loading} alt='loading' className='load'></img>}
+      {!load &&
+        <ul>
+          {produtos && produtos.map((produto) => (
+            <li key={produto.id}>{produto.name} - R$: {produto.price}</li>
+          ))}
+        </ul>
+      }
       <br />
       <hr />
       <br />
@@ -70,13 +73,16 @@ function App() {
             <input type="text" name='Myname' onChange={(e) => setName(e.target.value)} value={name} />
           </label>
           <br />
+          <br />
           <label >
             <span htmlFor="Myprice">Preço do Produto</span>
             <br />
             <input type="number" name='Myprice' onChange={(e) => setPrice(e.target.value)} value={price} />
           </label>
-            <br />
-          <input type="submit" value="Enviar" />
+          <br />
+          <br />
+          {load && <input type="submit" disabled value="Aguarde..." />}
+          {!load && <input type="submit" value="cadastrar" />}
         </form>
       </div>
     </div>

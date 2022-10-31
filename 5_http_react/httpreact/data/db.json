@@ -34,6 +34,21 @@
       "name": "mouse",
       "price": "60",
       "id": 7
+    },
+    {
+      "name": "mesa de computador",
+      "price": "180",
+      "id": 8
+    },
+    {
+      "name": "monitor filkon",
+      "price": "450",
+      "id": 9
+    },
+    {
+      "name": "monitor LD",
+      "price": "600",
+      "id": 10
     }
   ]
 }

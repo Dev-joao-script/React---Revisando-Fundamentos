@@ -6,24 +6,38 @@ export const useFetch = (url) => {
     const [method, setMethod] = useState(null);
     const [callFetch, setCallFetch] = useState(false);
 
-const httpConfig = (data, method) =>{
-if (method === "POST") {
-    setConfig({
-        method,
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data),
-    })
-    setMethod(method)
-}
-}
+    const [load, setLoad] = useState(false);
+
+    const [error, setError] = useState(null);
+
+    const httpConfig = (data, method) => {
+        if (method === "POST") {
+            setConfig({
+                method,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data),
+            })
+            setMethod(method)
+        }
+    }
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(url)
-            const json = await response.json()
-            setData(json)
+            setLoad(true)
+            try {
+                const response = await fetch(url)
+                const json = await response.json()
+                setData(json)
+                setError(null)
+            } catch (e) {
+                console.log(e.message);
+                setData("")
+                setError("Houve algum erro:")
+            }
+            setLoad(false)
+
         }
         fetchData();
     }, [url, callFetch]);
@@ -40,6 +54,6 @@ if (method === "POST") {
         httpRequest();
     }, [config], method, url);
 
-    return { data, httpConfig };
+    return { data, httpConfig, load, error };
 
 }
