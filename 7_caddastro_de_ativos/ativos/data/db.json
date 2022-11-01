@@ -1,0 +1,49 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Mouse Escritorios",
+      "price": 59.9
+    },
+    {
+      "id": 2,
+      "name": "Teclado Escritoris",
+      "price": 90
+    },
+    {
+      "name": "Cadeiras de escritório",
+      "price": "600.00",
+      "id": 3
+    },
+    {
+      "name": "Cadeiras de escritório",
+      "price": "600.00",
+      "id": 4
+    },
+    {
+      "name": "mesa de computador",
+      "price": "450.00",
+      "id": 5
+    },
+    {
+      "name": "monitor LCD",
+      "price": "1400.00",
+      "id": 6
+    },
+    {
+      "name": "monitor LCD",
+      "price": "1400.00",
+      "id": 7
+    },
+    {
+      "name": "monitor LCD",
+      "price": "1400.00",
+      "id": 8
+    },
+    {
+      "name": "monitor filkon",
+      "price": "800.00",
+      "id": 9
+    }
+  ]
+}
